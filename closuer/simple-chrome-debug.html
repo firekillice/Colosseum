@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            g = 30
+			function testCloure() {
+                var i = 5
+                return function (x) {
+                    i = g + 1 + x
+                    return i
+                }
+            }
+			
+            function testing(){
+                var ct = testCloure()
+                ct = testCloure()
+            }
+        </script>
+ 
+    </head>
+ 
+    <body>
+        <div id="sign">
+            <form>
+                <input type="submit" name="Sign Up" value="Sign Up" id="sub" onclick="testing()">
+                </input>
+            </form>
+        </div>
+    </body>
+</html>
