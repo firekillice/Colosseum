@@ -1,4 +1,6 @@
 #include <stdio.h>
+int g_i;
+extern int extern_var;
 int print(int x) {
-	//printf("%d",x);
+	extern_var = 40;
 }
