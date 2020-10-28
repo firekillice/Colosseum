@@ -1,0 +1,177 @@
+<!-- 使用vscode开发 -->
+<!-- 使用Live Server 插件，实现修改代码实时显示; 文本上右击选择“Open with Live Server”-->
+<!--参考网页http://www.onlywebpro.com/2011/07/02/html5-canvas-for-absolute-beginners-part-2/-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="id=edge">
+        <title>hello, canvas</title>
+        <script type="text/javascript">
+            function drawShape() {
+                    /*  绘制矩形
+                    var myCanvas = document.getElementById("myCanvas");
+                    var ctx = myCanvas.getContext("2d");
+                    ctx.fillRect(20, 20, 100, 100);
+                    ctx.strokeRect(10,10,120,120);
+                    ctx.clearRect(45,45,50,50);
+                    */
+
+                    /* 绘制绿色菱形
+                    var myCanvas = document.getElementById("myCanvas");
+                    var ctx = myCanvas.getContext("2d");
+                        
+                    //Begin our drawing
+                    ctx.beginPath();
+                    ctx.moveTo(75,0);
+                    ctx.lineTo(150,100);
+                    ctx.lineTo(75, 200);
+                    ctx.lineTo(0,100);
+                        
+                    //Define the style of the shape
+                    ctx.lineWidth = 1;
+                    ctx.fillStyle = "rgb(102, 204, 0)";
+                    ctx.strokeStyle = "rgb(0, 50, 200)";
+                        
+                    ctx.closePath();
+                        
+                    //Fill the path with ourline and color
+                    ctx.fill();
+                    ctx.stroke();
+                    */
+
+                    /* 加载图形
+                    var ctx = document.getElementById('myCanvas').getContext('2d');
+                    var img = new Image();
+                    img.onload = function(){
+                        ctx.drawImage(img,0,0);
+                            
+                        ctx.beginPath();
+                        ctx.moveTo(100,115);
+                        ctx.lineTo(120,115);
+                        ctx.lineTo(120,145);
+                        ctx.lineTo(100,145);
+                        ctx.closePath();
+                        ctx.stroke();
+                            
+                        ctx.beginPath();
+                        ctx.moveTo(110,145);
+                        ctx.lineTo(110,175);
+                        ctx.stroke();
+                    };
+                img.src = 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3088786723,881777113&fm=26&gp=0.jpg';
+                */
+                
+                /* 简单动画
+                var canvas;
+                var ctx;
+                var x = 568;
+                var y = 262;
+                var mx = 2;
+                var my = 4;
+                var WIDTH = 568;
+                var HEIGHT = 262;
+                    
+                init();
+                function circle(x,y,r) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI*2, true);
+                    ctx.fill();
+                }
+                
+                function clear() {
+                    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+                }
+                
+                function init() {
+                    canvas = document.getElementById("myCanvas");
+                    ctx = canvas.getContext("2d");
+                    return setInterval(draw, 10);
+                }
+                
+                function draw() {
+                    clear();
+                    circle(x, y, 20);
+                    
+                    if (x + mx > WIDTH || x + mx < 0)
+                        mx = -mx;
+                    if (y + my > HEIGHT || y + my < 0)
+                        my = -my;
+                    
+                    x += mx;
+                    y += my;
+                }*/
+
+                var canvas;
+                var ctx;
+                var x = 284;
+                var y = 130;
+                var mx = 0;
+                var my = 0;
+                var WIDTH = 568;
+                var HEIGHT = 262;
+
+                function circle(x,y,r) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, r, 0, Math.PI*2, true);
+                    ctx.fill();
+                }
+                    
+                function clear() {
+                    ctx.clearRect(0, 0, WIDTH, HEIGHT);
+                }
+                    
+                function init() {
+                    canvas = document.getElementById("myCanvas");
+                    ctx = canvas.getContext("2d");
+                    window.onkeydown = keydownControl;
+                    return setInterval(draw, 10);
+                }
+                    
+                function draw() {
+                    clear();
+                    circle(x, y, 20);
+                    
+                    if (x + mx > WIDTH || x + mx < 0)
+                        mx = -mx;
+                    if (y + my > HEIGHT || y + my < 0)
+                        my = -my;
+                    
+                    x += mx;
+                    y += my;
+                    
+                }
+                    
+                function keydownControl(e) {
+                        if(e.keyCode==37) {
+                                mx = -2;
+                                my = 0;
+                        } else
+                        if (e.keyCode==38) {
+                                mx = 0;
+                                my = -2;
+                        } else if
+                        (e.keyCode==39) {
+                                mx = 2;
+                                my = 0;
+                        } else
+                        if (e.keyCode==40) {
+                                mx = 0;
+                                my = 2;
+                        }
+                }
+                    
+                init();
+            }
+    </script>
+
+    </head>
+    <body onload="drawShape()">
+        <canvas id="myCanvas" width="300" height="300">
+        <!-- 为用户提供替换内容 -->
+        对不起，您的浏览器不支持Canvas
+        </canvas>
+</body>
+
+</html>
