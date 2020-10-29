@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="id=edge">
+        <title>quick-sort</title>
+        <style>
+            body{
+                margin: 0;
+                padding: 0;
+                background: #F6F6F6;
+            }
+
+            .div1 {
+                margin: 50px auto;
+                width: 500px;
+            }
+
+            #cvs {
+                background: #FFF;
+                box-shadow: 0px 0px 1px 1px #555555;
+                margin: 10px;
+            }
+        </style>
+        <script type="text/javascript" src="assets/js/paiting.js"></script>
+        <script type="text/javascript" src="assets/js/config.js"></script>
+        <script type="text/javascript" src="assets/js/data.js"></script>
+    </head>
+    <body>
+        <div class="div1">
+            <canvas id="cvs" width="500" height="500"></canvas>
+            <button onclick="start()">开始</button>
+        </div>
+        
+        <script type="text/javascript">
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+            painting.setContext(ctx)
+
+            draw(rtd.getList());
+
+            function draw(){
+                console.log('drawing once ')
+                var base_x = 0;
+                var base_y = config.ctx.height();
+                painting.startDraw();
+                painting.drawRefLine(base_x, base_y, rtd, config);
+                painting.drawList(base_x, base_y, rtd, config);
+            }
+
+            function swap(firstIndex, secondIndex){
+                rtd.swap(firstIndex, secondIndex)
+
+                rtd.quickSort.setLeft(firstIndex)
+                rtd.quickSort.setRight(secondIndex)
+                
+                draw();
+            }
+
+            function partition(startIndex, endIndex) {
+                console.log(startIndex + " " + endIndex );
+
+                items = rtd.getList()
+                var pivot = items[startIndex];//取第一个元素为基准值
+                rtd.quickSort.setPivot(startIndex)
+
+                var left = startIndex;
+                var right = endIndex;
+                while (true) {
+                    //从左往右扫描
+                    while (items[left] <= pivot) {
+                        left++;
+                        if (left == right) {
+                            break;
+                        }
+                    }
+
+                    //从右往左扫描
+                    while (pivot < items[right]) {
+                        right--;
+                        if (left == right) {
+                            break;
+                        }
+                    }
+
+                    //左右指针相遇
+                    if (left >= right) {
+                        break;
+                    }
+                    swap(left, right);
+                }
+
+                swap(startIndex, right);
+                rtd.quickSort.setRight(-1)
+                rtd.quickSort.setLeft(-1)
+                return right;
+            }
+
+            function quickSort(left, right) {
+                if ( right <= left) {
+                    return;
+                }
+
+                if (rtd.getList().length > 1) {
+                    index = partition(left, right);
+                    quickSort(left, index - 1);
+                    quickSort(index + 1, right);
+                }
+
+                rtd.quickSort.setRight(-1)
+                rtd.quickSort.setLeft(-1)
+                rtd.quickSort.setPivot(-1)
+                draw();
+            }
+        
+            function start(){            
+                quickSort(0, rtd.getList().length - 1 );    
+                setTimeout(function(){
+                    draw();
+                }, 2000);
+            }
+    </script>
+        
+</body>
+</html>

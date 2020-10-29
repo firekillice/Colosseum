@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="id=edge">
+        <title>quick-sort</title>
+        <style>
+            body{
+                margin: 0;
+                padding: 0;
+                background: #F6F6F6;
+            }
+
+            .div1 {
+                margin: 50px auto;
+                width: 500px;
+            }
+
+            #cvs {
+                background: #FFF;
+                box-shadow: 0px 0px 1px 1px #555555;
+                margin: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="div1">
+            <canvas id="cvs" width="500" height="500"></canvas>
+            <button onclick="start()">开始</button>
+        </div>
+        
+        <script type="text/javascript">
+            var cvs = document.getElementById('cvs');
+            var ctx = cvs.getContext('2d');
+            var lists = [32, 31, 29, 26, 20, 24, 35, 6, 25, 39, 13,
+                33, 8, 38, 10, 18, 5, 3, 27, 21, 17, 34, 28, 14, 
+                12, 23, 7, 22, 16, 19, 37, 9, 2, 30, 11, 36, 4, 
+                15, 40, 1];
+
+            var latency = 100;
+            var index = 1;      //延时函数计数
+            draw(lists);
+    
+            function clearCanvas(){
+                ctx.clearRect(0, 0, cvs.width, cvs.height);
+            }
+
+            function delay(arr, first, second, pivotIndex) {   
+                return new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                    resolve([arr, first, second, pivotIndex]);
+                    }, getLatency());
+                });
+            }
+
+            function getLatency() {
+                return index * latency;
+            }
+
+            async function draw(arr, first, second, pivotIndex){
+                console.log('start draw ' + first + ' ' + second)
+                delay(arr, first, second, pivotIndex).then(
+                    function (v) {
+                        console.log('drawing ' + first + ' ' + second)
+                        arr = v[0];
+                        first = v[1];
+                        second = v[2];
+                        pivotIndex = v[3];
+                        clearCanvas();
+                        for(var i in arr){
+                            var x = 10 + 12 * i;
+                            var y = arr[i] * 10;
+                            ctx.beginPath();
+                            if(i == first)
+                                ctx.fillStyle = 'yellow';
+                            else if(i == second)
+                                ctx.fillStyle = 'yellow';
+                            else if(i == pivotIndex)
+                                ctx.fillStyle = 'red';
+                            else ctx.fillStyle = 'orange';
+                            ctx.fillRect( x, 480 - y, 10, y );
+                            ctx.closePath();
+                        }
+                    }
+                );
+                console.log('end draw ' + first + ' ' + second)
+            }
+
+            function cpy(arr){
+                var item = [];
+                for(var i in arr){
+                    item[i] = arr[i];
+                }
+                return item;
+            }
+
+            function swap(items, firstIndex, secondIndex, pivotIndex){
+                //交换数据
+                var temp = items[firstIndex];
+                items[firstIndex] = items[secondIndex];
+                items[secondIndex] = temp;
+                //延时画图
+                var ls = cpy(items);
+                draw(ls, firstIndex, secondIndex, pivotIndex);
+                index ++;
+            }
+
+            function partition(items, startIndex, endIndex) {
+                console.log(startIndex + " " + endIndex );
+                var left = startIndex;
+                var right = endIndex;
+                var pivot = items[startIndex];//取第一个元素为基准值
+
+                while (true) {
+                    //从左往右扫描
+                    while (items[left] <= pivot) {
+                        left++;
+                        if (left == right) {
+                            break;
+                        }
+                    }
+
+                    //从右往左扫描
+                    while (pivot < items[right]) {
+                        right--;
+                        if (left == right) {
+                            break;
+                        }
+                    }
+
+                    //左右指针相遇
+                    if (left >= right) {
+                        break;
+                    }
+
+                    swap(items, left, right, startIndex);
+                }
+
+                swap(items, startIndex, right, startIndex);
+                return right;
+            }
+
+            function quickSort(items, left, right) {
+                if ( right <= left) {
+                    return;
+                }
+                var index;
+                if (items.length > 1) {
+                    index = partition(items, left, right);
+                    quickSort(items, left, index - 1);
+                    quickSort(items, index + 1, right);
+                }
+                return items;
+            }
+        
+            function start(){
+                draw(lists);            
+                var arr = cpy(lists);   
+                index = 0;              
+                quickSort( arr, 0, arr.length - 1 );    
+                setTimeout(function(){
+                    draw(arr);
+                }, getLatency());
+            }
+    </script>
+        
+</body>
+</html>

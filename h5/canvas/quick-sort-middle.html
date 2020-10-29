@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="id=edge">
-        <title>hello, canvas</title>
+        <title>quick-sort</title>
         <style>
             body{
                 margin: 0;
@@ -24,7 +24,7 @@
             }
         </style>
     </head>
-    <body  ready="ready()">
+    <body>
         <div class="div1">
             <canvas id="cvs" width="500" height="500"></canvas>
             <button onclick="start()">开始</button>
@@ -37,6 +37,8 @@
                 33, 8, 38, 10, 18, 5, 3, 27, 21, 17, 34, 28, 14, 
                 12, 23, 7, 22, 16, 19, 37, 9, 2, 30, 11, 36, 4, 
                 15, 40, 1];
+
+            var latency = 100;
             var index = 0;      //延时函数计数
             draw(lists);
     
@@ -44,7 +46,16 @@
                 ctx.clearRect(0, 0, cvs.width, cvs.height);
             }
 
-            function draw(arr, first, second){
+            var sleep = function(time) {
+                var startTime = new Date().getTime() + parseInt(time, 10);
+                while(new Date().getTime() < startTime) {}
+            };
+
+            function getLatency() {
+                return index * latency;
+            }
+
+            function draw(arr, first, second, pivotIndex){
                 clearCanvas();
                 for(var i in arr){
                     var x = 10 + 12 * i;
@@ -54,6 +65,8 @@
                         ctx.fillStyle = 'yellow';
                     else if(i == second)
                         ctx.fillStyle = 'yellow';
+                    else if(i == pivotIndex)
+                        ctx.fillStyle = 'red';
                     else ctx.fillStyle = 'orange';
                     ctx.fillRect( x, 480 - y, 10, y );
                     ctx.closePath();
@@ -68,7 +81,7 @@
                 return item;
             }
 
-            function swap(items, firstIndex, secondIndex){
+            function swap(items, firstIndex, secondIndex, pivotIndex){
                 //交换数据
                 var temp = items[firstIndex];
                 items[firstIndex] = items[secondIndex];
@@ -76,15 +89,15 @@
                 //延时画图
                 var ls = cpy(items);
                 setTimeout(function(){
-                    draw(ls, firstIndex, secondIndex);
-                }, index * 100);
+                    draw(ls, firstIndex, secondIndex, pivotIndex);
+                }, getLatency());
                 index ++;
             }
 
             function partition(items, left, right) {
                 var pivot = items[Math.floor((right + left) / 2)],
-                    i = left,
-                    j = right;
+                i = left,
+                j = right;
                 while (i <= j) {
                     while (items[i] < pivot) {
                         i++;
@@ -93,14 +106,14 @@
                         j--;
                     }
                     if (i <= j) {
-                        swap(items, i, j);
+                        swap(items, i, j, pivot);
                         i++;
                         j--;
                     }
                 }
                 return i;
             }
-            //快排算法，直接借鉴的别人的代码，如果是其他排序算法，只要把交换数据部分改成swap函数，同样可以绘制出动画
+
             function quickSort(items, left, right) {
                 var index;
                 if (items.length > 1) {
@@ -115,7 +128,7 @@
                 }
                 return items;
             }
-
+        
             function start(){
                 draw(lists);            
                 var arr = cpy(lists);   
@@ -123,10 +136,9 @@
                 quickSort( arr, 0, arr.length - 1 );    
                 setTimeout(function(){
                     draw(arr);
-                }, index * 100);
+                }, getLatency());
             }
     </script>
         
 </body>
-
 </html>
