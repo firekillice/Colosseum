@@ -5,8 +5,14 @@ UIEvent.event_type = {
     Delete:     2,
     Change:     3,
     Swap:       4,
-    Normal:     5,
-    PickPivot:  6,
+
+    CursorMove: 15,
+    CursorRMove: 16,
+    CursorLMove: 17,
+
+    Normal:     20,
+    PickPivot:  21,
+    Attention:  22,
 }
 
 UIEvent.buildEvent = function(et, data, context) {

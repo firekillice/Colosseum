@@ -3,51 +3,53 @@
 <canvas id="canvas-1" width="400" height="100">
 </canvas>
 <script>
-var c = document.getElementById('canvas-1');
-var ctx = c.getContext('2d');
+    var c = document.getElementById('canvas-1');
+    var ctx = c.getContext('2d');
 
-// 小球
-var ball = {
-  x: 10,
-  y: 50,
-  direction:1,
-  radius: 10,
-  color: 'black',
-  draw: function() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-    ctx.closePath();
-    ctx.fillStyle = this.color;
-    ctx.fill();
-  }
-};
-
-function animate_it (){
-    ctx.clearRect(0,0,c.width,c.height);
-    ball.draw();
-
-    if ( ball.direction == 1 )
-    {
-        ball.x += 100/60;
-    }else {
-        ball.x -= 200/60;
+    // 小球
+    var ball = {
+    x: 10,
+    y: 50,
+    direction:1,
+    radius: 10,
+    color: 'black',
+    draw: function() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+        ctx.closePath();
+        ctx.fillStyle = this.color;
+        ctx.fill();
     }
+    };
+
+    function animate_it (){
+        ctx.clearRect(0,0,c.width,c.height);
+        ball.draw();
+
+        if ( ball.direction == 1 )
+        {
+            ball.x += 100/60;
+        }else {
+            ball.x -= 200/60;
+        }
 
 
-    if (ball.x <= 0 ){
-        ball.x = 0;
-        ball.direction = 1;
-    }
+        if (ball.x <= 0 ){
+            ball.x = 0;
+            ball.direction = 1;
+        }
 
-    if ( ball.x > 400 ){
-        ball.x = 400;
-        ball.direction = 0;
+        if ( ball.x > 400 ){
+            ball.x = 400;
+            ball.direction = 0;
+        }
+
+        window.requestAnimationFrame(animate_it);
     }
 
     window.requestAnimationFrame(animate_it);
-}
-
-window.requestAnimationFrame(animate_it);
-console.log("logging")
+    console.log("logging")
 
 </script>
+</body>
+</html>

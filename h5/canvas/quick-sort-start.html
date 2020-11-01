@@ -14,10 +14,12 @@
 
             .div1 {
                 margin: 50px auto;
-                width: 500px;
             }
 
             #cvs {
+                margin-right: auto;
+                margin-left: auto;
+                display: block;
                 background: #FFF;
                 box-shadow: 0px 0px 1px 1px #555555;
                 margin: 10px;
@@ -31,11 +33,12 @@
     </head>
     <body>
         <div class="div1">
-            <canvas id="cvs" width="500" height="500"></canvas>
+            <canvas id="cvs" width="1024" height="480"></canvas>
             <button onclick="start()">开始</button>
             <button onclick="pause()">暂停</button>
-            <button onclick="next()">下一步</button>
             <button onclick="previous()">上一步</button>
+            <button onclick="next()">下一步</button>
+            <button onclick="reset()">重置</button>
         </div>
         
         <script type="text/javascript">
@@ -55,6 +58,9 @@
             }
             function previous() {
                 quickSort.previous()
+            }
+            function reset() {
+                quickSort.reset()
             }
     </script>
         
