@@ -8,18 +8,18 @@
 
     // 小球
     var ball = {
-    x: 10,
-    y: 50,
-    direction:1,
-    radius: 10,
-    color: 'black',
-    draw: function() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
-        ctx.closePath();
-        ctx.fillStyle = this.color;
-        ctx.fill();
-    }
+        x: 10,
+        y: 50,
+        direction:1,
+        radius: 10,
+        color: 'black',
+        draw: function() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
     };
 
     function animate_it (){
