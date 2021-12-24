@@ -1,0 +1,25 @@
+<!-- 演示selector的使用优先级
+
+!important > style > id > class (如果有多个，则按照css的加载顺序计算) > default
+
+近的style大于远的style，比如h1中的定义>body中的定义
+-->
+
+
+<style>
+    body {
+      background-color: black;
+      font-family: monospace;
+      color: green;
+    }
+    #orange-text {
+      color: orange;
+    }
+    .pink-text {
+      color: pink !important;
+    }
+    .blue-text {
+      color: blue;
+    }
+  </style>
+  <h1 style="color:white;" id="orange-text" class="pink-text blue-text">Hello World!</h1>

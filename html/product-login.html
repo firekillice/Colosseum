@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        @media (max-width: 600px) {
+            #header-img {
+                margin: auto;
+            }
+        }
+
+        @media (max-width: 500px) {
+           header {
+               flex-wrap: wrap;
+           }
+        }
+
+        body {
+            background-color: #eee;
+        }
+
+        header {
+            position: fixed;
+            display: flex;
+            flex-direction: row;
+            padding: 0 20px;
+            justify-content: space-around;
+            align-items: center;
+            max-height: 50px;
+            padding: 0;
+        }
+
+        #logo {
+            min-width: 200px;
+            width: 60vw;
+            display: flex;
+        }
+
+        #header-img {
+            width: 100%;
+            height: 100%;
+            max-width: 300px;
+           
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        nav ul {
+            display: flex;
+            flex-direction: row;
+            width: 35vw;
+            justify-content: space-around
+        }
+
+        ul li {
+            list-style:none;
+        }
+
+        main {
+            position: relative;
+            top: 50px;
+        }
+
+        #operation {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-between;
+            height: 150px;
+        }
+
+        #operation form {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        #operation input {
+            height: 25px;
+        }
+
+        input[type="button"] {
+            border-radius: 5px;
+            background-color: #f1c40f;
+        }
+
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            <img id="header-img" src="https://cdn.freecodecamp.org/testable-projects-fcc/images/product-landing-page-logo.png" alt="">
+        </div>
+        
+        <nav id="nav-bar">
+            <ul>
+                <li><a class="nav-link" href="#feature">Features</a></li>
+                <li><a class="nav-link" href="#video">How It Works</a></li>
+                <li><a class="nav-link" href="#price">Pricing</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="operation">
+            <h2>Handcrafted, home-made masterpieces</h2>
+            <form id="form">
+                <input type="email" id="email" placeholder="Please Enter your email" >
+                <input type="button" id="summit">
+            </form>
+            <div>
+        </div>
+   
+        <!--
+        </div id="feature">
+        <div id="video" >
+            <video src="https://youtu.be/y8Yv4pnO7qc" controls="controls"></video>
+        </div>
+        <div id="price">
+            <p>price list</p>
+        </div>
+        -->
+    </main>
+</body>

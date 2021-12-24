@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        body {
+        background-image: linear-gradient(115deg, rgba(58, 58, 158, 0.8), rgba(136, 136, 206, 0.7) ), url(https://cdn.freecodecamp.org/testable-projects-fcc/images/survey-form-background.jpeg);
+        }
+        h2 {
+            color: red
+        }
+
+        @media(max-height: 800px) {
+            p {
+                font-size: 10px;
+            }
+        }
+
+        .responsive-img {
+            height: auto;
+            max-width: 100%;
+        }
+
+        #box-1 {
+            background-color: dodgerblue;
+            flex: 2 2 150px;  /*flex-grow flex-shrink flex-basis*/
+            
+            height: 200px;
+        }
+
+        #animation-example {
+            height: 40px;
+            width: 40px;
+
+            animation-name: rainbow;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+        }
+        #animation-example:hover {
+            transform: scale(1.5);
+        }
+        @keyframes rainbow {
+            0% {
+                background-color: blue;
+            }
+            50% {
+                background-color: green;
+            }
+            100% {
+                background-color: yellow;
+            }
+        }
+
+    </style>
+</head>
+
+<h2 style="color: red;">red text by style</h2>
+<h2>red text by css</h2>
+<div id="animation-example"></div>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-image: linear-gradient(115deg, rgba(58, 58, 158, 0.8), rgba(136, 136, 206, 0.7) ), url(https://cdn.freecodecamp.org/testable-projects-fcc/images/survey-form-background.jpeg);
+                font-family: 'Poppins', sans-serif;
+                --btn-color: #37af65
+            }
+
+            main {
+                background-color: rgba(27, 27, 50, 0.8);
+                width: 50%;
+                margin: auto;
+                display: block;
+                color: white;
+                border-radius: 0.25rem;
+                padding: 10px;
+                font-size: 1.125rem;
+            }
+
+            #title  {
+                text-align: center;
+                display: block;
+                margin: auto;
+                padding-bottom: 10px;
+                padding-top: 20px;
+                color: white;
+            }
+
+            #description {
+                text-align: center;
+                display: block;
+                margin: auto;
+                color: white;
+                padding-bottom: 10px;
+            }
+
+            .inline-with-margin-top {
+                display: block;
+                padding: 0;
+                margin-top: 30px;
+                margin-bottom: 10px;
+            }
+
+            .block {
+                display: block;
+            }
+
+            #survey-form textarea {
+                width: 100%;
+            }
+
+            .input_area {
+                height: 30px;
+                width: 100%;
+                display: block;
+            }
+
+            .sm-padding {
+                padding: 3px;
+            }
+
+            .sm-right-margin {
+                margin-right: 0.625rem;
+            }
+
+            .btn-summit {
+                display: block;
+                background-color: var(--btn-color);
+                width: 100%;
+                padding: 0.75rem;
+                border-radius: 2px;
+                color: inherit;
+                font-size: inherit;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="title">freeCodeCamp Survey Form</h1>
+        <p id="description">Thank you for taking the time to help us improve the platform</p>
+
+        <main>
+            <form id="survey-form">
+                <label id="name-label" for="name" class="inline-with-margin-top">Name</label>
+                <input type="text"  class="input_area" id="name" required placeholder="Enter your name" tabindex="1">
+
+                <label id="email-label" for="email" class="inline-with-margin-top">Email</label>
+                <input type="email" id="email" class="input_area" placeholder="Enter your email" required>
+
+                <label id="number-label" for="number" placeholder="Age" class="inline-with-margin-top">Age(optional)</label>
+                <input type="number" id="number" class="input_area" min="10" max="150" >
+
+                <label class="inline-with-margin-top">Which option best describes your current role?</label>
+                <select id="dropdown" class="input_area" >
+                    <option value ="Student">Student</option>
+                    <option value ="FTJ">Full Time Job</option>
+                    <option value="FTL">Full Time Learner</option>
+                    <option value="PNTS">Prefor not to say</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <p class="inline-with-margin-top">Would you recommend freeCodeCamp to a friend?</p>
+                <label class="block sm-padding"><input type="radio" name="radio_recomment_option" class="sm-right-margin">Definitely</label> 
+                <label class="block sm-padding"><input type="radio" name="radio_recomment_option" class="sm-right-margin">Maybe</label> 
+                <label class="block sm-padding"><input type="radio" name="radio_recomment_option" class="sm-right-margin">Not sure</label> 
+
+                <p class="inline-with-margin-top">What would you like to see improved? (Check all that apply)</p>
+                <label class="block sm-padding"><input type="checkbox" class="sm-right-margin">Front-end Projects</label>
+                <label class="block sm-padding"><input type="checkbox" class="sm-right-margin">Back-end Projects</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Data Visualization</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Challenges</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Open Source Community</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Gitter help rooms</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Videos</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">City Meetups</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Wiki</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Forum</label>
+                <label class="block sm-padding"> <input type="checkbox" class="sm-right-margin">Additional Courses</label>
+
+                <p class="inline-with-margin-top">Any comments or suggestions?</p>
+                <textarea rows="3" cols="20" placeholder="Enter your comment here...">  </textarea>
+
+                <button class="inline-with-margin-top btn-summit" type="submit" id="submit" >Summit</button>
+            </form>
+
+        
+        </main>
+    </body>
+</html>

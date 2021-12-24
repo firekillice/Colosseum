@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Tab Title
+        </title>
+        <style type="text/css"> 
+            h1 {color:red}
+            p {color:blue}
+        </style>
+    </head>
+
+    <body>
+        <h1>
+            form demostration
+        </h1>
+
+        <button type="button">buttonButton</button><br>
+        <button type="reset">resetButton</button><br>
+        <button type="submit">submitButton</button><br>
+
+        textInput:  <input type="text" name="textInput"/> <br>
+        checkboxInput： <input type="checkbox" name="checkboxInput" id='id_checkbox_input' /> <br>
+        radioInput1:  <input type="radio" name="radioInput1" id='id_radio_input'/> <br>
+        radioInput2:  <input type="radio" name="radioInput2" id='id_radio_input'/> <br>
+        passwordInput: <input type="password" name="passwordInput"/> <br>
+        submitInput: <input type="submit" name="submitInput"/> <br>
+
+        textArea: <textarea rows="3" cols="20"> text area </textarea> <br>
+
+        <select>
+            <option value="volvo">volvo</option>
+            <option value="audi">audi</option>
+            <option value="benz">benz</option>
+        </select><br>
+        
+        <form>
+        <label for="id_radio_input">active radio input(by id)</label><br>
+        <label for="id_checkbox_input">active checkbox input(by id)</label><br>
+        </form>
+
+        <select>
+            <optgroup label="fruit">
+                <option>Apple</option>
+                <option>Pear</option>
+                <option>Banana</option>
+                <option>Cherry</option>
+            </optgroup>
+            <optgroup label="animal">
+                <option>Cat</option>
+                <option>Dog</option>
+                <option>Fox</option>
+                <option></option>
+            </optgroup>
+        </select><br>
+
+        <fieldset>
+            <legend>Health Information</legend>
+            height: <input type="text" />
+            weight: <input type="text" />
+        </fieldset><br>
+
+        <!--------------------------------------------------------------------------------------------->
+        <hr>
+        
+        
+        <!--------------------------------------------------------------------------------------------->
+
+        <hr>
+        <h1>
+            link tag demostration
+        </h1>
+        <a href="www.baidu.com">baidu</a> <!-- 被用户能看到的超链接 --> <br>
+        <link rel="stylesheet" type="text/css" href="theme.css"><!-- 不被用户看到的link --><br>
+        <img src="./assets/img_link_example.jfif" alt="Family Holiday" height="128" weight="256"><br>
+        <p>navigation</p>
+        <nav>
+            <a href='https://www.baidu.com/' >baidu</a>
+            <a href='https://www.google.com/'>google</a>
+            <a href='https://www.bing.com/'>bing</a>
+            <a></a>
+        </nav>
+        <br>
+        <nav id="navbar" >
+            <ul >
+              <li style="display: inline" ><a href="">Home</a></li>
+              <li style="display: inline"><a href="">Contact</a></li>
+            </ul>
+          </nav>
+        <hr>
+        <!--------------------------------------------------------------------------------------------->
+        <hr>
+        
+        <h2>
+            list tag demostration
+        </h2>
+        <ol>
+            <li> C </li>
+            <li> C++ </li>
+            <li> C# </li>
+            <li> Java </li>
+            <li> PHP </li>
+        </ol>
+
+        <ol type="A" start=B> <!-- type: 1, a, A, i, I default 1 -->
+            <li> 张居正 </li>
+            <li> 曾国藩 </li>
+            <li> 姚崇 </li>
+        </ol>
+        <!--------------------------------------------------------------------------------------------->
+        <hr>
+        
+        <h2>
+            table tag demostration
+        </h2>
+        <table border="1">
+            <tr>
+              <th>Month</th>
+              <th>Savings</th>
+            </tr>
+            <tr>
+              <td>January</td>
+              <td>$100</td>
+            </tr>
+          </table>
+        <!--------------------------------------------------------------------------------------------->
+        <hr>
+        <h2>
+            text control demostration
+        </h2>
+        <p>  这是一个普通段落 </p> <br>
+        <p> <b> 这是一个粗体文本</b> </p><br>
+        <p><span>span text</span>none span text</p>
+
+    </body>
+
+</html>
