@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
+        crossorigin="anonymous"></script>
+    <title>D3</title>
+    <style>
+        .bar {
+            width: 25px;
+            height: 100px;
+            margin-right: 2px;
+            display: inline-block;
+            background-color: blue;
+        }
+
+        .bar:hover {
+            fill: brown;
+        }
+
+        svg {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            d3.select("body").append("h1").text("Learning D3");
+            d3.selectAll("li").text("list item");
+
+            const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+            d3.select("body").selectAll("h1").
+                data(dataset).enter().
+                append("h1").text("New Title");
+            d3.select("body").selectAll("h2").
+                data(dataset).enter().
+                append("h2").text((d) => d + "USD").
+                style("color", "blue");
+            d3.select("body").selectAll("h3").
+                data(dataset).enter().
+                append("h2").text((d) => d + "USD").
+                style("color", (d) => {
+                    if (d < 20) return "red";
+                    else return "green";
+                })
+            d3.select("#div-1").selectAll("div")
+                .data(dataset).enter()
+                .append("div")
+                .attr("class", "bar");
+
+            d3.select("#div-2").selectAll("div")
+                .data(dataset).enter()
+                .append("div")
+                .attr("class", "bar")
+                .style("height", (d) => d * 10 + "px");
+
+            /*************************************************************************/
+            const w = 500;
+            const h = 100;
+
+            const svg1 = d3.select("#svg-1").append("svg").style("height", h).style("width", w);
+            svg1.append("rect").attr("width", 25).attr("height", 100).attr("x", 0).attr("y", 0);
+
+            //显示一个数组
+            const svg2 = d3.select("#svg-2").append("svg").style("height", h).style("width", w);
+            svg2.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => {
+                    return i * 30;
+                })
+                .attr("y", 0)
+                .attr("width", 25)
+                .attr("height", (d, i) => d * 3);
+
+            //修改为正确方向
+            const svg3 = d3.select("#svg-3").append("svg").style("height", h).style("width", w);
+            svg3.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => {
+                    return i * 30;
+                })
+                .attr("y", (d, i) => (h - d * 3))
+                .attr("width", 25)
+                .attr("height", (d, i) => d * 3)
+                .attr("fill", "navy");
+
+            //增加底部数字
+            const svg4 = d3.select("#svg-4").append("svg").style("height", h).style("width", w);
+            svg4.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => {
+                    return i * 30;
+                })
+                .attr("y", (d, i) => (h - d * 3))
+                .attr("width", 25)
+                .attr("height", (d, i) => d * 3)
+                .attr("fill", "navy");
+
+            svg4.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .attr("x", (d, i) => i * 30)
+                .attr("y", (d, i) => h - 3 * d - 3)
+                .text((d) => d)
+
+            //颜色与字体变化
+            const svg5 = d3.select("#svg-5").append("svg").style("height", h).style("width", w);
+            svg5.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => {
+                    return i * 30;
+                })
+                .attr("y", (d, i) => (h - d * 3))
+                .attr("width", 25)
+                .attr("height", (d, i) => d * 3)
+                .attr("fill", "navy");
+
+            svg5.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .attr("x", (d, i) => i * 30)
+                .attr("y", (d, i) => h - 3 * d - 3)
+                .text((d) => d)
+                .style("font-size", "25px")
+                .style("fill", "red");
+
+            //悬浮颜色变化
+            const svg6 = d3.select("#svg-6").append("svg").style("height", h).style("width", w);
+            svg6.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => {
+                    return i * 30;
+                })
+                .attr("y", (d, i) => (h - d * 3))
+                .attr("width", 25)
+                .attr("height", (d, i) => d * 3)
+                .attr("fill", "navy")
+                .attr("class", "bar");
+
+            svg6.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .attr("x", (d, i) => i * 30)
+                .attr("y", (d, i) => h - 3 * d - 3)
+                .text((d) => d)
+                .style("font-size", "25px")
+                .style("fill", "red");
+
+            //增加悬浮文字提示
+            const svg7 = d3.select("#svg-7").append("svg").style("height", h).style("width", w);
+            svg7.selectAll("rect")
+                .data(dataset)
+                .enter()
+                .append("rect")
+                .attr("x", (d, i) => {
+                    return i * 30;
+                })
+                .attr("y", (d, i) => (h - d * 3))
+                .attr("width", 25)
+                .attr("height", (d, i) => d * 3)
+                .attr("fill", "navy")
+                .attr("class", "bar")
+                .append("title")
+                .text((d) => 'value is ' + d);
+
+            svg7.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .attr("x", (d, i) => i * 30)
+                .attr("y", (d, i) => h - 3 * d - 3)
+                .text((d) => d)
+                .style("font-size", "25px")
+                .style("fill", "red");
+
+            /*************************************************************************/
+            const circle_dataset = [
+                [34, 78],
+                [109, 280],
+                [310, 120],
+                [79, 411],
+                [420, 220],
+                [233, 145],
+                [333, 96],
+                [222, 333],
+                [78, 320],
+                [21, 123]
+            ];
+
+
+            const cw = 500;
+            const ch = 500;
+
+            const sc1 = d3.select("#svg-circle-1")
+                .append("svg")
+                .attr("width", cw)
+                .attr("height", ch);
+
+
+            sc1.selectAll("circle").
+                data(circle_dataset).enter().
+                append("circle").
+                attr("cx", (d) => d[0]).attr("cy", (d) => ch - d[1]).attr("r", "5");
+
+            const sc2 = d3.select("#svg-circle-2")
+                .append("svg")
+                .attr("width", cw)
+                .attr("height", ch);
+
+
+            sc2.selectAll("circle").
+                data(circle_dataset).enter().
+                append("circle").
+                attr("cx", (d) => d[0]).attr("cy", (d) => ch - d[1]).attr("r", "5");
+            sc2.selectAll("text").
+                data(circle_dataset).enter().
+                append("text").
+                attr("x", (d) => d[0] + 5).attr("y", (d) => ch - d[1]).text((d) => d[0] + ", " + d[1])
+
+
+            /*************************************************************************/
+            const padding = 60;
+
+            const xScale = d3.scaleLinear()
+                .domain([0, d3.max(circle_dataset, (d) => d[0])])
+                .range([padding, cw - padding]);
+
+            const yScale = d3.scaleLinear()
+                .domain([0, d3.max(circle_dataset, (d) => d[1])])
+                .range([ch - padding, padding]);
+
+            const sc3 = d3.select("#svg-circle-3")
+                .append("svg")
+                .attr("width", cw)
+                .attr("height", ch);
+
+            sc3.selectAll("circle")
+                .data(circle_dataset)
+                .enter()
+                .append("circle")
+                .attr("cx", (d) => xScale(d[0]))
+                .attr("cy", (d) => yScale(d[1]))
+                .attr("r", "5")
+
+            sc3.selectAll("text")
+                .data(circle_dataset)
+                .enter()
+                .append("text")
+                .text((d) => (d[0] + ", "
+                    + d[1]))
+                .attr("x", (d) => xScale(d[0] + 10))
+                .attr("y", (d) => yScale(d[1]))
+
+            const xAxis = d3.axisBottom(xScale);
+            const yAxis = d3.axisLeft(yScale);
+
+            sc3.append("g")
+                .attr("transform", "translate(0," + (ch - padding) + ")")
+                .call(xAxis);
+
+            sc3.append("g")
+                .attr("transform", "translate(" + padding + ",0)")
+                .call(yAxis);
+        })
+
+    </script>
+    <ul>
+        <li>Example</li>
+        <li>Example</li>
+        <li>Example</li>
+    </ul>
+    <div id="div-1"></div>
+    <div id="div-2"></div>
+
+    <div id="svg-1"></div>
+    <div id="svg-2"></div>
+    <div id="svg-3"></div>
+    <div id="svg-4"></div>
+    <div id="svg-5"></div>
+    <div id="svg-6"></div>
+    <div id="svg-7"></div>
+
+    <div id="svg-circle-1"></div>
+    <div id="svg-circle-2"></div>
+    <div id="svg-circle-3"></div>
+    <div id="svg-circle-4"></div>
+    <div id="svg-circle-5"></div>
+    <div id="svg-circle-6"></div>
+
+
+
+</body>
+
+</html>
