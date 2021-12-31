@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title>Hello Vue2</title>
+
+    <style>
+        .class1 {
+            background: #444;
+            color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ simpleUsge }}</h1>
+
+        <h1>{{ embededContent.embeded }}</h1>
+        <h1>{{ embededContent.html }}</h1>
+        <h1>{{ methodUsage() }}</h1>
+
+        <div v-html="vHtmlElement"></div>
+
+        <div v-bind:class="{'class1': use}">
+            v-bind:class
+        </div>
+
+        <label>
+            修改颜色<input type="checkbox" v-model="use">
+        </label>
+
+
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                simpleUsge: 'first usage',
+                embededContent: {
+                    embeded: "embeded usage",
+                },
+                vHtmlElement: '<h1>v-html usage</h1>',
+                use: true,
+            },
+            methods: {
+                methodUsage: function () {
+                    return "This is a method usage."
+                }
+            }
+        })
+
+    </script>
+
+</body>
+
+</html>
