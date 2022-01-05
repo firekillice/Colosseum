@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+    <title>Hello Vue2</title>
+
+    <style type='text/css'>
+        .btn {
+            width: 60px;
+            height: 30px;
+            border: 0px;
+            background-color: #7f7f7f;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /*fade*/
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 2s
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0
+        }
+
+        /*slide fade*/
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+
+        .slide-fade-leave-active {
+            transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+
+        .slide-fade-enter,
+        .slide-fade-leave-to {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+
+        #uda {
+            position: fixed;
+            top: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button class="btn" v-on:click="show=!show">点我</button>
+        <transition name="fade">
+            <p v-show="show" v-bind:style="styleobj">fade标准动画演示</p>
+        </transition>
+
+        <transition name="slide-fade">
+            <p v-show="show" v-bind:style="styleobj">slide-fade标准动画演示</p>
+        </transition>
+
+        <div id='uda'>
+            <transition v-on:before-enter="beforeEnter" v-on:enter="enter" v-on:leave="leave" v-bind:css="false">
+                <p v-if="show">自定义动画演示</p>
+            </transition>
+        </div>
+
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                show: true,
+                styleobj: {
+                    fontSize: '30px',
+                    color: 'red'
+                }
+            },
+            methods: {
+                beforeEnter: function (el) {
+                    el.style.opacity = 0
+                    el.style.transformOrigin = 'left'
+                },
+
+                enter: function (el, done) {
+                    Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 })
+                    Velocity(el, { fontSize: '1em' }, { complete: done })
+                },
+
+                leave: function (el, done) {
+                    Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+                    Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+                    Velocity(el, {
+                        rotateZ: '45deg',
+                        translateY: '30px',
+                        translateX: '30px',
+                        opacity: 0
+                    }, { complete: done })
+                }
+            }
+        });
+
+    </script>
+</body>
+
+</html>

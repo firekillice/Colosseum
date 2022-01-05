@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title>Hello Vue2</title>
+
+    <style>
+        .class1 {
+            background: #444;
+            color: #eee;
+        }
+
+        svg {
+            background-color: pink;
+        }
+        
+        .singleCheckBoxStyle {
+            background-color: #444;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ simpleUsge }}</h1>
+
+        <h1>{{ embededContent.embeded }}</h1>
+        <h1>{{ embededContent.html }}</h1>
+        <h1>{{ methodUsage() }}</h1>
+        <!--有圆括号-->
+        <h1>{{ reversedMessage }}</h1>
+        <!--没有圆括号-->
+
+        <div v-html="vHtmlElement"></div>
+
+        <div v-bind:class=vBindClass1>
+            v-bind: class=var
+        </div>
+
+        <div v-bind:class="{'vBindClass1': vBindFlag, 'vBindClass2': vBindFlag}">
+            v-bind: {clasName: var, className: var}
+        </div>
+
+        <div v-bind:class="[vBindClass1, vBindClass2]">
+            v-bind:[var, var]
+        </div>
+
+        <div class="reserverClass" v-bind:class="[vBindClass1]">
+            v-bind: class + v-bind
+        </div>
+
+        <p v-if="vIfFLag">v-if usage</p>
+
+        <ul>
+            <li v-for="(value, key) in vForKvMan">{{key}}:{{value}} </li>
+        </ul>
+
+        <ul>
+            <li v-for="animal in vForKvAnimals">{{animal.name}} </li>
+        </ul>
+
+        <ul>
+            <li v-for="animal in vForIndexAnimals">{{animal}} </li>
+        </ul>
+
+        <ul>
+            <li v-for="(index, value) in vForIndexAnimals">{{index}}:{{value}} </li>
+        </ul>
+
+        <ul>
+            <li v-for="n in 10">
+                {{ n }}
+            </li>
+        </ul>
+
+        <p style="display: inline;">{{vWatchCounter}}</p>
+        <button type="button" @click="addCounter"
+            style="color: white; font-size: 1rem; height: 30px; width: 60px; background-color: #7f7f7f; border-radius: 5px; border: 0px; cursor: pointer;">增加</button>
+        <button type="button" @click="vWatchCounter--"
+            style="color: white; font-size: 1rem; height: 30px; width: 60px; background-color: #7f7f7f; border-radius: 5px; border: 0px; cursor: pointer;">减少</button>
+
+        <p v-bind:class="{singleCheckBoxStyle: vModelSingleCheckBox}" >单个复选框：</p>
+        <label>修改颜色<input type="checkbox" v-model="vModelSingleCheckBox"></label>
+
+        <p>多个复选框：</p>
+        <input type="checkbox" id="runoob" value="Runoob" v-model="vModelMultiCheckBox">
+        <label for="runoob">Runoob</label>
+        <input type="checkbox" id="google" value="Google" v-model="vModelMultiCheckBox">
+        <label for="google">Google</label>
+        <input type="checkbox" id="taobao" value="Taobao" v-model="vModelMultiCheckBox">
+        <label for="taobao">taobao</label>
+        <span>选择的值为: {{ vModelMultiCheckBox }}</span>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                simpleUsge: 'first usage',
+                embededContent: {
+                    embeded: "embeded usage",
+                },
+                vHtmlElement: '<h1>v-html usage</h1>',
+                vComputedMsg: "AComputedMessage",
+
+                /*v-model*/
+                vModelSingleCheckBox: false,
+                vModelMultiCheckBox: [],
+
+                /*v-bind*/
+                vBindFlag: true,
+                vBindClass1: "vBindClassName1",
+                vBindClass2: "vBindClassName2",
+
+                /*v-if*/
+                vIfFLag: true,
+
+                /*v-for*/
+                vForKvAnimals: [
+                    { name: "Cat" },
+                    { name: "Dog" },
+                    { name: "Rabbit" },
+                    { name: "Elephant" },
+                    { name: "Fox" }
+                ],
+
+                vForKvMan: {
+                    name: "Jim",
+                    sex: "male",
+                    age: 18,
+                },
+
+                vForIndexAnimals: [
+                    "Cat",
+                    "Dog",
+                    "Rabbit",
+                    "Elephant",
+                    "Fox"
+                ],
+
+                /*v-watch*/
+                vWatchCounter: 0,
+
+                /*v-on*/
+                vOnBarX: 0,
+                vOnBarXMax: 500,
+            },
+            methods: {
+                methodUsage: function () {
+                    return "This is a method usage."
+                },
+                addCounter: function () {
+                    this.vWatchCounter++;
+                },
+            },
+            computed: {
+                reversedMessage: function () {
+                    // `this` 指向 vm 实例
+                    return this.vComputedMsg.split('').reverse().join('')
+                }
+            }
+        })
+
+        app.$watch("vWatchCounter", function (nval, oval) {
+            alert('计数器值的变化 :' + oval + ' 变为 ' + nval + '!');
+        })
+
+
+    </script>
+
+</body>
+
+</html>

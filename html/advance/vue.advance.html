@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <title>Hello Vue2</title>
+
+    <style type='text/scss'>
+
+    </style>
+</head>
+
+<body>
+    <hr>
+    <div id="app">
+        <roombird v-bind:bind-attr="vBindAttrForComponent" component-attr="component attribute from father element">
+        </roombird>
+
+        <ol>
+            <todo-item v-for="item in sites" v-bind:todo="item"></todo-item>
+        </ol>
+        <p>{{buttonCounter}}</p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+
+        <flybird-input v-model="inputCounter"></flybird-input>
+        <p>输入的数字为:{{inputCounter}}</p>
+
+        <base-checkbox v-model="checkBoxFlag"></base-checkbox>
+        <div v-show="checkBoxFlag">
+            如果选择框打勾我就会显示。
+        </div>
+
+        <div v-user-directive:hello.a.b="userDefineDirectiveMessage"></div>
+
+        <div v-user-color="{ color: 'green', text: '自定义指令修改颜色!' }"></div>
+
+    </div>
+    <hr>
+    <div id="app2">
+        <flybird></flybird>
+    </div>
+    <hr>
+    <script>
+        Vue.component(
+            "flybird", {
+            template: "<h1>This is a first global component named flybird.</h1>"
+        },
+        );
+
+        Vue.component(
+            "todo-item", {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        },
+        );
+
+        Vue.component(
+            "button-counter", {
+            props: ['todo'],
+            template: '<button v-on:click="incrementHandler" style="color: white; font-size: 1rem; height: 30px; width: 60px; background-color: #7f7f7f; border-radius: 5px; border: 0px; cursor: pointer;" ></button>',
+            /*注意：data是个函数*/
+            data: function () {
+                return {
+                    counter: 0
+                }
+            },
+            methods: {
+                incrementHandler: function () {
+                    this.counter += 1;
+                    this.$emit('increment');
+                }
+            }
+        },
+        );
+
+        Vue.component(
+            "flybird-input", {
+            props: ['value'],
+            template: `
+    <p>   
+      <input
+       ref="input"
+       :value="value" 
+       @input="$emit('input', $event.target.value)"
+      >
+    </p>
+    `,
+        }
+        );
+
+        Vue.component('base-checkbox', {
+
+            model: {
+                prop: 'checked',
+                event: 'change'  // onchange 事件
+            },
+            props: {
+                checked: Boolean
+            },
+
+            template: `
+   <input
+     type="checkbox"
+     v-bind:checked="checked"
+     v-on:change="$emit('change', $event.target.checked)"
+   >
+ `
+        })
+
+        Vue.directive('userDirective', {
+            bind: function (el, binding, vnode) {
+                var s = JSON.stringify
+                el.innerHTML =
+                    'name: ' + s(binding.name) + '<br>' +
+                    'value: ' + s(binding.value) + '<br>' +
+                    'expression: ' + s(binding.expression) + '<br>' +
+                    'argument: ' + s(binding.arg) + '<br>' +
+                    'modifiers: ' + s(binding.modifiers) + '<br>' +
+                    'vnode keys: ' + Object.keys(vnode).join(', ')
+            }
+        })
+
+        Vue.directive('userColor', 
+            function(el, binding) {
+                el.innerHTML = binding.value.text
+                el.style.backgroundColor = binding.value.color
+            }
+        )
+
+        var rb = {
+            props: ['componentAttr', 'bindAttr'],   /*请注意此处的命名方式: (1) **/
+            template: '<div> <h1>This is a first local component named roombird.</h1> <span>{{componentAttr}}</span><br> <span>{{bindAttr}}</span> </div>'
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                vBindAttrForComponent: "component attribute from vue attrs",
+                sites: [
+                    { text: 'Runoob' },
+                    { text: 'Google' },
+                    { text: 'Taobao' }
+                ],
+                buttonCounter: 0,
+                inputCounter: 0,
+                checkBoxFlag: true,
+                userDefineDirectiveMessage: "userDefineDirectiveMessage"
+            },
+            components: {
+                roombird: rb,
+            },
+            methods: {
+                incrementTotal: function () {
+                    this.buttonCounter++;
+                }
+            },
+        });
+
+        var app2 = new Vue({
+            el: '#app2',
+            data: {
+
+            },
+            components: {
+            },
+            methods: {
+
+            },
+        });
+
+    </script>
+</body>
+
+</html>
