@@ -1,0 +1,28 @@
+[bits 16]
+	org     0x7c00 
+
+	jmp     Entry
+
+Entry:
+	;db 0x99
+	mov ax,0xb800
+	mov gs,ax 
+	mov byte [gs:0x00],'r' 
+	mov byte [gs:0x01],0x74
+	mov byte [gs:0x02],'a'
+	mov byte [gs:0x03],0x74
+	mov byte [gs:0x04],'t'
+	mov byte [gs:0x05],0x74
+	mov byte [gs:0x06],'s'
+	mov byte [gs:0x07],0x74
+	mov byte [gs:0x08],'o'
+	mov byte [gs:0x09],0x74
+	mov byte [gs:0x0a],'s'
+	mov byte [gs:0x0b],0x74
+                 	
+	jmp $
+
+Fill_Sector:
+	;db 		0x98
+	resb    510-($-$$)
+	db      0x55, 0xaa

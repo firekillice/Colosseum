@@ -20,5 +20,6 @@ section .text
 		mov eax,10
 		mul ebx
 		call iprintLF
+		
 		call quit
 		
