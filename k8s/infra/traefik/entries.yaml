@@ -1,0 +1,21 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: traefic-service-entry
+  namespace: storage
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`redis.storage.190921.xyz`)
+      kind: Rule
+      services:
+        - name: svc-php-redis-admin
+          kind: Service
+          port: 16379
+    - match: Host(`sql.storage.190921.xyz`)
+      kind: Rule
+      services:
+        - name: svc-php-my-admin
+          kind: Service
+          port: 13306

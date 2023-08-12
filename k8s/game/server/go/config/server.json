@@ -1,0 +1,13 @@
+{
+    "TcpPort": 8999,
+    "StepPerMs": 2000,
+    "PoolSize": 8,
+    "MaxConn": 50000,
+    "KeepAliveInterval": 30,
+    "KeepAliveTimeout": 90,
+    "MsgVersion": "1.0.0",
+    "MsgZip": 0,
+    "MsgEncrypt": 0,
+    "Environment": "development",
+    "PublicBalanceThreshold": 100
+}

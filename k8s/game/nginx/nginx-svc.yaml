@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-nginx
+spec:
+  type: LoadBalancer
+  ports:
+  - name: nginx-game
+    port: 10080
+    protocol: TCP
+    targetPort: 80
+  - name: nginx-manage
+    port: 10081
+    protocol: TCP
+    targetPort: 81
+  - name: nginx-rock-mongo
+    port: 10082
+    protocol: TCP
+    targetPort: 82
+  selector:
+    app: nginx-php

@@ -1,0 +1,3 @@
+persistence:
+  storageClass: alicloud-disk-ssd
+  size: 20Gi

@@ -1,0 +1,48 @@
+kind: List
+apiVersion: v1
+items:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: deployment-php-my-admin
+      namespace: storage
+    spec:
+      selector:
+        matchLabels:
+          app: deployment-php-my-admin
+      template:
+        metadata:
+          labels:
+            app: deployment-php-my-admin
+        spec:
+          containers:
+          - image: capnexus-registry.capstonedev.cn/phpmyadmin:latest
+            imagePullPolicy: IfNotPresent
+            name: phpmyadmin
+            env:
+            - name: PMA_HOST
+              value: svc-storage-mysql.storage.svc.cluster.local
+            - name: PMA_PORT
+              value: "3306"
+            volumeMounts:
+              #- mountPath: /etc/localtime
+              #name: time
+          volumes:
+            #          - name: time
+            # hostPath:
+            # path: /etc/localtime
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: svc-php-my-admin
+      namespace: storage
+    spec:
+      type: ClusterIP
+      ports:
+      - name: svc-php-my-admin
+        port: 13306
+        protocol: TCP
+        targetPort: 80
+      selector:
+        app: deployment-php-my-admin

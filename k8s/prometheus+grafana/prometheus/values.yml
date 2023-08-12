@@ -1,0 +1,23 @@
+# adds additional scrape configs to prometheus.yml
+# must be a string so you have to add a | after extraScrapeConfigs:
+# example adds prometheus-blackbox-exporter scrape config
+alertmanager:
+  enabled: false
+kubeStateMetrics:
+  enabled: false
+
+server:
+  persistentVolume:
+    enabled: false
+    #storageClass: openebs-hostpath
+
+extraScrapeConfigs: |
+  - job_name: 'bq-yakyu-pvp-metrics'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+        - targets:
+            - bq-yakyu-pvp-0-external:8975
+            - bq-yakyu-pvp-1-external:8975
+
+

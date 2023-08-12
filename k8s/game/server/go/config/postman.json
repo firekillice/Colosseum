@@ -1,0 +1,23 @@
+{
+    "mailbox": {
+        "direct": {
+            "server": "smtp.exmail.qq.com",
+            "port": 465,
+            "user": "redmine@capstonegaming.com",
+            "password": "CapsPass2016"
+        }
+    },
+    "collector": {
+        "to": [
+            "bin.wang@capstonegaming.com",
+            "lulu.lin@capstones.cn",
+            "qiao.chu@capstones.cn"
+        ],
+        "period": 1
+    },
+    "service": {
+        "restful": {
+            "listen": "localhost:23980"
+        }
+    }
+}

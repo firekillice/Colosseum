@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="info" monitorInterval="60">
+    <Properties>
+        <property name="BASE_DIR">/logs</property>
+        <property name="LOG_HOME">${BASE_DIR}/today</property>
+        <property name="BACKUP_HOME">${BASE_DIR}/game-log-bkup</property>
+        <property name="SELF_BACKUP_HOME">${BASE_DIR}/service-log-bkup</property>
+    </Properties>
+    <Appenders>
+        <RollingRandomAccessFile name="accessLogFile" fileName="${LOG_HOME}/access.log" filePattern="${BACKUP_HOME}/$${date:yyyy-MM}/access-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="StatusLogFile" fileName="${LOG_HOME}/status.log" filePattern="${SELF_BACKUP_HOME}/$${date:yyyy-MM}/status-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="RuntimeLogFile" fileName="${LOG_HOME}/runtime.log" filePattern="${SELF_BACKUP_HOME}/$${date:yyyy-MM}/runtime-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="ServerErrorLogFile" fileName="${LOG_HOME}/error.log" filePattern="${SELF_BACKUP_HOME}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="ClientErrLogFile" fileName="${LOG_HOME}/clientErr.log" filePattern="${SELF_BACKUP_HOME}/$${date:yyyy-MM}/clientErr-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="DbLogFile" fileName="${LOG_HOME}/db.log" filePattern="${SELF_BACKUP_HOME}/db-%d{yyyy-MM}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="AccountLogFile" fileName="${LOG_HOME}/account.log" filePattern="${BACKUP_HOME}/$${date:yyyy-MM}/account-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200"/>
+        </RollingRandomAccessFile>
+        <RollingRandomAccessFile name="dist1LogFile" fileName="${LOG_HOME}/dist1.log" filePattern="${BACKUP_HOME}/$${date:yyyy-MM}/dist1-%d{yyyy-MM-dd}-%i.log.gz" immediateFlush="false">
+            <PatternLayout charset="UTF-8">
+                <Pattern>{"time":"%d","level":"%p","message":%m}%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="false"/>
+                <SizeBasedTriggeringPolicy size="500MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="200"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <root level="info">
+            <AppenderRef ref="RuntimeLogFile"/>
+        </root>
+        <Logger name="access" level="info" additivity="false">
+            <AppenderRef ref="accessLogFile"/>
+        </Logger>
+        <Logger name="status" level="info" additivity="false">
+            <AppenderRef ref="StatusLogFile"/>
+        </Logger>
+        <Logger name="runtime" level="info" additivity="false">
+            <AppenderRef ref="RuntimeLogFile"/>
+        </Logger>
+        <Logger name="error" level="info" additivity="false">
+            <AppenderRef ref="ServerErrorLogFile"/>
+        </Logger>
+        <Logger name="clientErr" level="info" additivity="false">
+            <AppenderRef ref="ClientErrLogFile"/>
+        </Logger>
+        <Logger name="db" level="info" additivity="false">
+            <AppenderRef ref="DbLogFile"/>
+        </Logger>
+        <Logger name="account" level="info" additivity="false">
+            <AppenderRef ref="AccountLogFile"/>
+        </Logger>
+        <Logger name="dist1" level="info" additivity="false">
+            <AppenderRef ref="dist1LogFile"/>
+        </Logger>
+    </Loggers>
+</Configuration>

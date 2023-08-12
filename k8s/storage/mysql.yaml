@@ -1,0 +1,75 @@
+kind: List
+apiVersion: v1
+items:
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: cm-mysql
+      namespace: storage
+    data:
+      mysqld.cnf: |-
+        [mysqld]
+        pid-file	= /var/run/mysqld/mysqld.pid
+        socket      = /var/run/mysqld/mysqld.sock
+        datadir	= /var/lib/mysql
+        symbolic-links = 0
+        max_allowed_packet = 50M
+        character_set_server = utf8
+        collation_server = utf8_general_ci
+        group_concat_max_len = 102400
+        [client]
+        default_character_set = utf8
+        
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: deployment-storage-mysql
+      namespace: storage
+    spec:
+      selector:
+        matchLabels:
+          app: deployment-storage-mysql
+      template:
+        metadata:
+          labels:
+            app: deployment-storage-mysql
+        spec:
+          containers:
+          - image: capnexus-registry.capstonedev.cn/mysql:8.0.22
+            imagePullPolicy: IfNotPresent
+            name: mysql
+            env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "123456"
+            volumeMounts:
+            - name: data-volume
+              mountPath: /var/lib/mysql
+            - name: config-volmue
+              mountPath: /etc/mysql/mysql.conf.d/
+                #            - mountPath: /etc/localtime
+                #name: time
+          volumes:
+          - name: data-volume
+            hostPath:
+              path: /home/sandstone/workpath/data/mysql
+          - name: config-volmue
+            configMap:
+              name: cm-mysql
+                #- name: time
+                #hostPath:
+                #path: /etc/localtime
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: svc-storage-mysql
+      namespace: storage
+    spec:
+      type: ClusterIP
+      ports:
+      - name: svc-mysql
+        port: 3306
+        protocol: TCP
+        targetPort: 3306
+      selector:
+        app: deployment-storage-mysql

@@ -1,0 +1,4 @@
+{
+    "conn": "svc-redis.default.svc.cluster.local:7478",
+    "password": "4rT35Ker4m"
+}

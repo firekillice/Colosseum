@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-go
+spec:
+  type: NodePort
+  ports:
+  - name: go-tcp
+    port: 12200
+    protocol: TCP
+    targetPort: 12200
+    nodePort: 30100
+  - name: go-http
+    port: 14001
+    protocol: TCP
+    targetPort: 14001
+    nodePort: 30200
+  selector:
+    app: nginx-php

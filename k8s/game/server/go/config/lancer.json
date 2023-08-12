@@ -1,0 +1,379 @@
+{
+    "coordinator": "127.0.0.1:23980",
+    "path": "bin/go:bin/nsq:bin/etcd:bin/confd:bin/perseus:bin/postman:bin/superconductors:bin/collector",
+    "modules": [
+      {
+        "module": "go",
+        "name": "gomaster",
+        "host": "127.0.0.1",
+        "launcher": "gomaster",
+        "options": {
+          "log": "{{.log}}",
+          "params": ""
+        },
+        "path": {
+          "log": "/logs/gor"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.admin",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "admin",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.net_tcp_1",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "net_tcp_1",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.net_tcp_2",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "net_tcp_2",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.net_http_1",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "net_http_1",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.net_http_2",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "net_http_2",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.public_1",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "public_1",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.public_2",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "public_2",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.security_1",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "security_1",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.chat_1",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "chat_1",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.match_1",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "match_1",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.matchd_1",
+        "host": "127.0.0.1",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "matchd_1",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "go",
+        "name": "goserver.matchd_2",
+        "host": "10.10.50.72",
+        "launcher": "goserver",
+        "options": {
+          "log": "{{.log}}",
+          "params": "matchd_2",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/gor",
+          "work_dir": "./bin/go"
+        }
+      },
+      {
+        "module": "nsq",
+        "name": "nsqlookupd.0",
+        "host": "127.0.0.1",
+        "launcher": "nsqlookupd",
+        "options": {
+          "log": "{{.log}}",
+          "params": "-broadcast-address 127.0.0.1 -http-address 127.0.0.1:4161 -tcp-address 127.0.0.1:4160"
+        },
+        "path": {
+          "log": "/logs/go/nsq/"
+        }
+      },
+      {
+        "module": "nsq",
+        "name": "nsqadmin",
+        "host": "127.0.0.1",
+        "launcher": "nsqadmin",
+        "options": {
+          "log": "{{.log}}",
+          "params": "-http-address 127.0.0.1:4171 -lookupd-http-address 127.0.0.1:4161"
+        },
+        "path": {
+          "log": "/logs/go/nsq/"
+        }
+      },
+      {
+        "module": "nsq",
+        "name": "nsqd.0",
+        "host": "127.0.0.1",
+        "launcher": "nsqd",
+        "options": {
+          "log": "{{.log}}",
+          "work_dir": "{{.work_dir}}",
+          "params": "-broadcast-address 127.0.0.1 -http-address 127.0.0.1:4151 -tcp-address 127.0.0.1:4150 -lookupd-tcp-address 127.0.0.1:4160 -max-req-timeout 4h -mem-queue-size 0"
+        },
+        "path": {
+          "log": "/logs/go/nsq/",
+          "work_dir": "/data/nsq/nsqd.0"
+        }
+      },
+      {
+        "module": "nsq",
+        "name": "nsqd.1",
+        "host": "127.0.0.1",
+        "launcher": "nsqd",
+        "options": {
+          "log": "{{.log}}",
+          "work_dir": "{{.work_dir}}",
+          "params": "-broadcast-address 127.0.0.1 -http-address 127.0.0.1:4251 -tcp-address 127.0.0.1:4250 -lookupd-tcp-address 127.0.0.1:4160 -max-req-timeout 4h -mem-queue-size 0"
+        },
+        "path": {
+          "log": "/logs/go/nsq/",
+          "work_dir": "/data/nsq/nsqd.1"
+        }
+      },
+      {
+        "module": "nsq",
+        "name": "nsqd.2",
+        "host": "127.0.0.1",
+        "launcher": "nsqd",
+        "options": {
+          "log": "{{.log}}",
+          "work_dir": "{{.work_dir}}",
+          "params": "-broadcast-address 127.0.0.1 -http-address 127.0.0.1:4351 -tcp-address 127.0.0.1:4350 -lookupd-tcp-address 127.0.0.1:4160 -max-req-timeout 4h -mem-queue-size 0"
+        },
+        "path": {
+          "log": "/logs/go/nsq/",
+          "work_dir": "/data/nsq/nsqd.2"
+        }
+      },
+      {
+        "module": "etcd",
+        "name": "etcd.0",
+        "host": "127.0.0.1",
+        "launcher": "etcd",
+        "options": {
+          "log": "{{.log}}",
+          "params": "--name infra0 --initial-advertise-peer-urls http://127.0.0.1:2480 --listen-peer-urls http://127.0.0.1:2480 --listen-client-urls http://127.0.0.1:2479 --advertise-client-urls http://127.0.0.1:2479 --initial-cluster-token cluster-igoal2 --initial-cluster infra0=http://127.0.0.1:2480,infra1=http://127.0.0.1:2580,infra2=http://127.0.0.1:2680 --initial-cluster-state new --data-dir {{.data_dir}}etcd.0"
+        },
+        "path": {
+          "log": "/logs/go/etcd/",
+          "data_dir": "/data/etcd/"
+        }
+      },
+      {
+        "module": "etcd",
+        "name": "etcd.1",
+        "host": "127.0.0.1",
+        "launcher": "etcd",
+        "options": {
+          "log": "{{.log}}",
+          "params": "--name infra1 --initial-advertise-peer-urls http://127.0.0.1:2580 --listen-peer-urls http://127.0.0.1:2580 --listen-client-urls http://127.0.0.1:2579 --advertise-client-urls http://127.0.0.1:2579 --initial-cluster-token cluster-igoal2 --initial-cluster infra0=http://127.0.0.1:2480,infra1=http://127.0.0.1:2580,infra2=http://127.0.0.1:2680 --initial-cluster-state new --data-dir {{.data_dir}}etcd.1"
+        },
+        "path": {
+          "log": "/logs/go/etcd/",
+          "data_dir": "/data/etcd/"
+        }
+      },
+      {
+        "module": "etcd",
+        "name": "etcd.2",
+        "host": "127.0.0.1",
+        "launcher": "etcd",
+        "options": {
+          "log": "{{.log}}",
+          "params": "--name infra2 --initial-advertise-peer-urls http://127.0.0.1:2680 --listen-peer-urls http://127.0.0.1:2680 --listen-client-urls http://127.0.0.1:2679 --advertise-client-urls http://127.0.0.1:2679 --initial-cluster-token cluster-igoal2 --initial-cluster infra0=http://127.0.0.1:2480,infra1=http://127.0.0.1:2580,infra2=http://127.0.0.1:2680 --initial-cluster-state new --data-dir {{.data_dir}}etcd.2"
+        },
+        "path": {
+          "log": "/logs/go/etcd/",
+          "data_dir": "data/etcd/"
+        }
+      },
+      {
+        "module": "confd",
+        "name": "confd.0",
+        "host": "127.0.0.1",
+        "launcher": "confd",
+        "options": {
+          "log": "{{.log}}",
+          "params": "-backend etcdv3 -node http://127.0.0.1:2379 -watch -confdir {{.conf_dir}}"
+        },
+        "path": {
+          "log": "/logs/go/confd/",
+          "conf_dir": "bin/confd/"
+        }
+      },
+      {
+        "module": "etcd",
+        "name": "etcd.gateway.0",
+        "host": "127.0.0.1",
+        "launcher": "etcd",
+        "options": {
+          "log": "{{.log}}",
+          "params": "gateway start --listen-addr=127.0.0.1:2379 --endpoints=127.0.0.1:2479,127.0.0.1:2579,127.0.0.1:2679"
+        },
+        "path": {
+          "log": "/logs/go/confd/",
+          "conf_dir": "bin/confd/"
+        }
+      },
+      {
+        "module": "postman",
+        "name": "postman",
+        "host": "127.0.0.1",
+        "launcher": "postman",
+        "options": {
+          "log": "{{.log}}"
+        },
+        "path": {
+          "log": "/logs/go/postman/"
+        }
+      },
+      {
+        "module": "superconductors",
+        "name": "superconductors",
+        "host": "127.0.0.1",
+        "launcher": "superconductors",
+        "options": {
+          "log": "{{.log}}"
+        },
+        "path": {
+          "log": "/logs/go/superconductors/"
+        }
+      },
+      {
+        "module": "collector",
+        "name": "collector0",
+        "host": "127.0.0.1",
+        "launcher": "collector",
+        "options": {
+          "log": "{{.log}}",
+          "params": "-web.listen-address 127.0.0.1:4040",
+          "work_dir": "{{.work_dir}}"
+        },
+        "path": {
+          "log": "/logs/go/collector",
+          "work_dir": "./bin/collector"
+        }
+      }
+    ]
+  }

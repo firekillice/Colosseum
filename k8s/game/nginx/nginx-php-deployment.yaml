@@ -1,0 +1,151 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-php
+spec:
+  selector: # 尝试选择已经存在在系统中的pod
+    matchLabels:
+      app: nginx-php
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-php
+    spec:
+      serviceAccountName: aliyun
+      imagePullSecrets:
+        - name: aliyun-secret
+      containers:
+      # nginx 启动game的container
+      - name: nginx-game
+        image: nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: time
+          readOnly: true
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-game-config
+          readOnly: true
+        - mountPath: /etc/nginx
+          name: nginx-base-config
+          readOnly: true
+        - mountPath: /logs
+          name: log-normal-path
+        - mountPath: /code/rockmongo-master
+          name: php-rock-mongo-code-path
+        - mountPath: /code/manage
+          name: php-manage-code-path      
+          
+      # PHP的container
+      - name: php-fpm-server
+        image: registry.cn-hangzhou.aliyuncs.com/sandstone/php:v-game-1.0.0
+        #imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/sh", "-c", "chmod 777 /code/manage/protected/runtime"]
+        ports:
+        - containerPort: 9000
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: time
+          readOnly: true
+        - mountPath: /code/gameserver
+          name: php-game-code-path
+        - mountPath: /code/rockmongo-master
+          name: php-rock-mongo-code-path
+        - mountPath: /code/manage
+          name: php-manage-code-path
+        - mountPath: /logs
+          name: log-normal-path
+        - mountPath: /code/gameserver/application/lib/config
+          name: server-game-config
+        - mountPath: /code/rockmongo-master/config.php
+          name: nginx-rock-config
+          subPath: config.php
+
+      # PHP的后台脚本
+      - name: php-cron-server
+        image: registry.cn-hangzhou.aliyuncs.com/sandstone/php:v-game-1.0.0
+        #imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
+        command: [ "/bin/sh"]
+        args: 
+          - /code/gameserver/cron/cron_task_service.sh
+          - /logs/cron
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: time
+          readOnly: true
+        - mountPath: /code/gameserver
+          name: php-game-code-path
+        - mountPath: /logs
+          name: log-normal-path
+        - mountPath: /code/gameserver/application/lib/config
+          name: server-game-config
+
+      # go
+      - name: go-server
+        image: registry.cn-hangzhou.aliyuncs.com/sandstone/centos7:goserver-1.0.0
+        #imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
+        lifecycle:
+         postStart:
+           exec:
+             command: ["/bin/sh", "-c", "cd /code/goserver/bin; ./lancer start"]
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 30; done;" ]
+        volumeMounts:
+        - mountPath: /etc/localtime
+          name: time
+          readOnly: true
+        - mountPath: /code/goserver
+          name: go-code-path
+        - mountPath: /code/goserver/bin/conf
+          name: server-game-go-config
+        - mountPath: /logs
+          name: log-normal-path
+        - mountPath: /data
+          name: data-normal-path
+
+      volumes:
+      - name: time
+        hostPath:
+          path: /etc/localtime
+      - name: php-rock-mongo-code-path
+        hostPath:
+          path: /data/cuser00/www/igoal3_server/rockmongo-master
+      - name: php-game-code-path
+        hostPath:
+          path:  /data/cuser00/www/igoal3_server/gameserver
+      - name: php-manage-code-path
+        hostPath:
+          path: /data/cuser00/www/igoal3_server/manage
+      - name: go-code-path
+        hostPath:
+          path: /data/cuser00/www/igoal3_server/goserver
+      - name: log-normal-path
+        hostPath:
+          path: /data/cuser00/var/log
+      - name: data-normal-path
+        hostPath:
+          path: /data/cuser00/data
+      - name: server-game-config
+        configMap:
+          name: server-game-config
+      - name: nginx-base-config
+        configMap:
+          name: nginx-base-config
+      - name: nginx-game-config
+        configMap:
+          name: nginx-game-config
+      - name: nginx-rock-config
+        configMap:
+          name: nginx-rock-config
+      - name: server-game-go-config
+        configMap:
+          name: server-game-go-config

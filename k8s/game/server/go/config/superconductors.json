@@ -1,0 +1,8 @@
+{
+    "postman": {
+        "address": "localhost:23980"
+    },
+    "cron_alert": {
+        "address": "localhost:26897"
+    }
+}

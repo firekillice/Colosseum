@@ -1,0 +1,117 @@
+{
+    "master": {
+        "host": "127.0.0.1",
+        "rootport": 12000
+    },
+    "servers": {
+        "admin": {
+            "host": "127.0.0.1",
+            "http": [
+                12010,
+                "/static"
+            ],
+            "module": "admin",
+            "remotes": [
+                "public",
+                "security"
+            ]
+        },
+        "profile": {
+            "module": "profile",
+            "testing": true
+        },
+        "external": {
+            "host": "http://nginx-php.default.svc.cluster.local:80/"
+        },
+        "net_tcp_1": {
+            "host": "127.0.0.1",
+            "tcpport": 12200,
+            "remotes": [
+                "public",
+                "security"
+            ],
+            "module": "net",
+            "interaddr": true
+        },
+        "net_tcp_2": {
+            "host": "127.0.0.1",
+            "tcpport": 12201,
+            "remotes": [
+                "public",
+                "security"
+            ],
+            "module": "net",
+            "interaddr": true
+        },
+        "net_http_1": {
+            "host": "127.0.0.1",
+            "http": [
+                12100,
+                "/static"
+            ],
+            "remotes": [
+                "public",
+                "security"
+            ],
+            "module": "net"
+        },
+        "net_http_2": {
+            "host": "127.0.0.1",
+            "http": [
+                12101,
+                "/static"
+            ],
+            "remotes": [
+                "public",
+                "security"
+            ],
+            "module": "net"
+        },
+        "public_1": {
+            "host": "127.0.0.1",
+            "rootport": 12300,
+            "module": "public"
+        },
+        "public_2": {
+            "host": "127.0.0.1",
+            "rootport": 12301,
+            "module": "public"
+        },
+        "security_1": {
+            "host": "127.0.0.1",
+            "rootport": 12320,
+            "module": "security"
+        },
+        "chat_1": {
+            "host": "127.0.0.1",
+            "http": [
+                12340,
+                "/static"
+            ],
+            "remotes": [],
+            "module": "chat"
+        },
+        "match_1": {
+            "module": "match",
+            "host": "127.0.0.1",
+            "mgo": true
+        },
+        "matchd_1": {
+            "module": "matchd",
+            "host": "127.0.0.1",
+            "http": [
+                12400,
+                "/static"
+            ]
+        },
+        "matchd_2": {
+            "module": "matchd",
+            "host": "127.0.0.1",
+            "http": [
+                12400,
+                "/static"
+            ]
+        }
+    },
+    "log": "/logs/gor"
+}

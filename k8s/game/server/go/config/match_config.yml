@@ -1,0 +1,11 @@
+---
+- name: match_error_collector
+  feature: Error
+  sourceFilePath:
+  - /logs/go
+  sourceFilePattern: matchd_[0-9]+_server.log
+  mailTitle: 豪门3-战斗服发生错误，比赛信息如下
+  recentTrackDuration: 3600
+  minPostDuration: 3600
+  postman: localhost:23980
+...

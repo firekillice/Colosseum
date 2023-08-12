@@ -1,0 +1,68 @@
+kind: List
+apiVersion: v1
+items:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: deployment-php-redis-admin
+      namespace: storage
+    spec:
+      selector:
+        matchLabels:
+          app: deployment-php-redis-admin
+      template:
+        metadata:
+          labels:
+            app: deployment-php-redis-admin
+        spec:
+          containers:
+            - image: capnexus-registry.capstonedev.cn/erikdubbelboer/phpredisadmin
+              imagePullPolicy: IfNotPresent
+              name: phpredisadmin
+              env:
+                - name: REDIS_1_HOST
+                  value: svc-storage-redis-01.storage.svc.cluster.local
+                - name: REDIS_1_PORT
+                  value: "6379"
+                - name: REDIS_1_NAME
+                  value: "storage-redis-01"
+                - name: REDIS_1_AUTH
+                  value: "4rT35Ker4m"
+                - name: REDIS_2_HOST
+                  value: svc-storage-redis-02.storage.svc.cluster.local
+                - name: REDIS_2_PORT
+                  value: "6389"
+                - name: REDIS_2_NAME
+                  value: "storage-redis-02"
+                - name: REDIS_2_AUTH
+                  value: "4rT35Ker4m"
+                - name: REDIS_3_HOST
+                  value: svc-storage-redis-03.storage.svc.cluster.local
+                - name: REDIS_3_PORT
+                  value: "6399"
+                - name: REDIS_3_NAME
+                  value: "storage-redis-03"
+                - name: REDIS_3_AUTH
+                  value: "4rT35Ker4m"
+              volumeMounts:
+                - mountPath: /etc/localtime
+                  name: time
+          volumes:
+            - name: time
+              hostPath:
+                path: /etc/localtime
+
+  - apiVersion: v1
+    kind: Service
+    metadata:
+      name: svc-php-redis-admin
+      namespace: storage
+    spec:
+      type: ClusterIP
+      ports:
+        - name: svc-php-redis-admin
+          port: 16379
+          protocol: TCP
+          targetPort: 80
+      selector:
+        app: deployment-php-redis-admin

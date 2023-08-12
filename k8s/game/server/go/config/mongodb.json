@@ -1,0 +1,29 @@
+{
+    "colUrls": {
+        "ChampionshipsScheduled": {
+            "addr": "mongodb://root:H5gamere40d6bjm#2021@mongodb.default.svc.cluster.local:27017",
+            "db": "AutoMatch_ht",
+            "poolSize": 50
+        },
+        "ChampionshipsCounterattack": {
+            "addr": "mongodb://root:H5gamere40d6bjm#2021@mongodb.default.svc.cluster.local:27017",
+            "db": "AutoMatch_ht",
+            "poolSize": 50
+        },
+        "WorldCupCompetitionResult": {
+            "addr": "mongodb://root:H5gamere40d6bjm#2021@mongodb.default.svc.cluster.local:27017",
+            "db": "AutoMatch_ht",
+            "poolSize": 50
+        },
+        "TopMatchResult": {
+            "addr": "mongodb://root:H5gamere40d6bjm#2021@mongodb.default.svc.cluster.local:27017",
+            "db": "AutoMatch_ht",
+            "poolSize": 50
+        },
+        "SkyArenaMatchResult": {
+            "addr": "mongodb://root:H5gamere40d6bjm#2021@mongodb.default.svc.cluster.local:27017",
+            "db": "AutoMatch_ht",
+            "poolSize": 50
+        }
+    }
+}

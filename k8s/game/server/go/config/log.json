@@ -1,0 +1,8 @@
+{
+    "logLevel": 0,
+    "file": {
+        "filename": "server.log",
+        "level": 0
+    },
+    "logPath": "/logs/go"
+}

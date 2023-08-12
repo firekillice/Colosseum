@@ -1,0 +1,7 @@
+{
+    "cluster": [
+        "localhost:4150",
+        "localhost:4250",
+        "localhost:4350"
+    ]
+}

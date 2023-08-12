@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: svc-redis
+spec:
+ type: NodePort
+ ports:
+ - port: 7478
+   protocol: TCP
+   targetPort: 6379
+ selector:
+   name: redis
