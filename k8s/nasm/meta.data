@@ -1,2 +1,4 @@
 REP:nasm 
 TAG:v-1.0.0
+
+例子:sh ./download_from_aliyun.sh nasm v-1.0.0
