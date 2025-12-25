@@ -1,5 +1,8 @@
+int sum(int a, int b)
+{
+    return a + b;
+}
 int main()
 {
-	return sum_multi(1,2,3,4,5,6, 7);
-//	return sum(1,3);
+   return sum(1,3);
 }
